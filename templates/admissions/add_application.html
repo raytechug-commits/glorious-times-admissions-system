@@ -1,0 +1,172 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Add Application | Glorious Times Standards School</title>
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<style>
+.application-page{max-width:1100px;margin:32px auto;padding:0 22px 50px;color:#182747}
+.application-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}
+.application-top h1{margin:0;color:#14213d;font-size:clamp(24px,3vw,32px)}
+.application-top p{margin:7px 0 0;color:#68758b}
+.application-back{display:inline-block;padding:11px 16px;border:1px solid #dce2ec;border-radius:9px;color:#14213d;text-decoration:none;font-weight:700;background:#fff}
+.application-progress{display:flex;gap:8px;margin:20px 0 24px}
+.application-progress span{height:5px;flex:1;background:#e4b64f;border-radius:8px}
+.application-section{margin-bottom:22px;background:#fff;border:1px solid #e3e8f0;border-radius:15px;overflow:hidden;box-shadow:0 7px 24px rgba(16,28,61,.045)}
+.application-section-head{display:flex;align-items:center;gap:13px;padding:20px 24px;background:#f8f9fc;border-bottom:1px solid #e8ecf3}
+.application-step{display:flex;align-items:center;justify-content:center;width:37px;height:37px;flex-shrink:0;border-radius:11px;background:#14213d;color:#fff;font-weight:800}
+.application-section-head h2{margin:0;color:#14213d;font-size:18px}
+.application-section-head p{margin:4px 0 0;color:#738096;font-size:13px}
+.application-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:19px;padding:24px}
+.application-field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.application-field.full{grid-column:1/-1}
+.application-field label{font-size:13px;font-weight:700;color:#283651}
+.application-field input,.application-field select,.application-field textarea{box-sizing:border-box;width:100%;min-height:45px;padding:11px 12px;border:1px solid #d7deea;border-radius:8px;background:#fff;color:#182747;font:inherit;font-size:14px;outline:none}
+.application-field textarea{min-height:90px;resize:vertical}
+.application-field input:focus,.application-field select:focus,.application-field textarea:focus{border-color:#24517b;box-shadow:0 0 0 3px rgba(36,81,123,.1)}
+.application-field small{font-size:11px;color:#7c8799}
+.application-required{color:#b51f32}
+.application-notice{padding:13px 15px;margin:0 24px 22px;border-radius:8px;background:#fff8e7;color:#735719;font-size:13px;line-height:1.6}
+.application-messages{margin:0 0 20px;padding:14px 18px;border-radius:9px;background:#fff1f2;color:#8f1827}
+.application-messages.success{background:#edf9f1;color:#17663a}
+.application-declaration{margin:24px;padding:18px;border:1px solid #e1e6ef;border-radius:10px;background:#fafbfe}
+.application-declaration label{display:flex;align-items:flex-start;gap:11px;font-size:13px;line-height:1.7;color:#34415a}
+.application-declaration input{width:18px;height:18px;margin-top:2px;accent-color:#14213d;flex-shrink:0}
+.application-actions{display:flex;justify-content:flex-end;align-items:center;gap:12px;margin-top:24px}
+.application-cancel,.application-submit{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:12px 20px;border-radius:9px;font:inherit;font-size:14px;font-weight:700;text-decoration:none;cursor:pointer}
+.application-cancel{border:1px solid #d9dfeb;background:#fff;color:#33415b}
+.application-submit{border:0;background:#14213d;color:#fff;box-shadow:0 6px 15px rgba(20,33,61,.16)}
+.application-submit:hover{background:#244d7c}
+@media(max-width:650px){.application-top{align-items:flex-start;flex-direction:column}.application-fields{grid-template-columns:1fr;padding:18px}.application-field.full{grid-column:auto}.application-section-head{padding:17px}.application-declaration{margin:18px}.application-actions{flex-direction:column-reverse;align-items:stretch}.application-cancel,.application-submit{width:100%;box-sizing:border-box}.application-progress{gap:5px}}
+</style>
+</head>
+<body>
+<main class="application-page">
+<header class="application-top">
+    <div class="application-school">
+        <img
+            src="{% static 'images/school-logo.png' %}"
+            alt="Glorious Times Standards School logo"
+            style="width:64px;height:64px;object-fit:contain;"
+        >
+        <div>
+            <h1>New Admission Application</h1>
+            <p>Glorious Times Standards Nursery and Primary School</p>
+        </div>
+    </div>
+
+    {% if public_application %}
+        <a class="application-back" href="/">Back to school website</a>
+    {% else %}
+        <a class="application-back" href="{% url 'admissions:dashboard' %}">Back to dashboard</a>
+    {% endif %}
+</header>
+
+<div class="application-progress" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+{% if messages %}
+{% for message in messages %}
+<div class="application-messages {% if message.tags == 'success' %}success{% endif %}" role="status">{{ message }}</div>
+{% endfor %}
+{% endif %}
+<form method="post">
+{% csrf_token %}
+<section class="application-section">
+<div class="application-section-head"><span class="application-step">01</span><div><h2>Child Information</h2><p>Enter the child's personal and school details.</p></div></div>
+<div class="application-fields">
+<div class="application-field"><label for="pupil_first_name">First name <span class="application-required">*</span></label><input id="pupil_first_name" name="pupil_first_name" value="{{ form_data.pupil_first_name|default:'' }}" required maxlength="100"></div>
+<div class="application-field"><label for="pupil_middle_name">Middle name</label><input id="pupil_middle_name" name="pupil_middle_name" value="{{ form_data.pupil_middle_name|default:'' }}" maxlength="100"></div>
+<div class="application-field"><label for="pupil_last_name">Last name <span class="application-required">*</span></label><input id="pupil_last_name" name="pupil_last_name" value="{{ form_data.pupil_last_name|default:'' }}" required maxlength="100"></div>
+<div class="application-field"><label for="date_of_birth">Date of birth <span class="application-required">*</span></label><input type="date" id="date_of_birth" name="date_of_birth" value="{{ form_data.date_of_birth|default:'' }}" required max="{{ today }}"></div>
+<div class="application-field"><label for="gender">Gender</label><select id="gender" name="gender"><option value="">Select gender</option><option value="Female">Female</option><option value="Male">Male</option><option value="Prefer not to say">Prefer not to say</option></select></div>
+<div class="application-field"><label for="class_applying_for">Class applying for <span class="application-required">*</span></label><select id="class_applying_for" name="class_applying_for" required><option value="">Select class</option><option>Baby Class</option><option>Middle Class</option><option>Top Class</option><option>Primary One</option><option>Primary Two</option><option>Primary Three</option><option>Primary Four</option><option>Primary Five</option><option>Primary Six</option><option>Primary Seven</option></select></div>
+<div class="application-field full"><label for="previous_school">Previous school (if any)</label><input id="previous_school" name="previous_school" value="{{ form_data.previous_school|default:'' }}" maxlength="200"></div>
+<div class="application-field full"><label for="medical_information">Medical or special learning information (optional)</label><textarea id="medical_information" name="medical_information" placeholder="Share information the school should know to support the child.">{{ form_data.medical_information|default:'' }}</textarea></div>
+</div>
+</section>
+<section class="application-section">
+<div class="application-section-head"><span class="application-step">02</span><div><h2>Father / Guardian Information</h2><p>Provide the contact details for the father or guardian.</p></div></div>
+<div class="application-fields">
+<div class="application-field"><label for="father_full_name">Full name</label><input id="father_full_name" name="father_full_name" value="{{ form_data.father_full_name|default:'' }}"></div>
+<div class="application-field"><label for="father_relationship">Relationship to child</label><select id="father_relationship" name="father_relationship"><option value="">Select relationship</option><option>Father</option><option>Guardian</option><option>Other</option></select></div>
+<div class="application-field"><label for="father_phone">Phone number</label><input type="tel" id="father_phone" name="father_phone" value="{{ form_data.father_phone|default:'' }}"></div>
+<div class="application-field"><label for="father_email">Email address</label><input type="email" id="father_email" name="father_email" value="{{ form_data.father_email|default:'' }}"></div>
+<div class="application-field full"><label for="father_occupation">Occupation</label><input id="father_occupation" name="father_occupation" value="{{ form_data.father_occupation|default:'' }}"></div>
+</div>
+</section>
+<section class="application-section">
+<div class="application-section-head"><span class="application-step">03</span><div><h2>Mother / Guardian Information</h2><p>Provide the contact details for the mother or guardian.</p></div></div>
+<div class="application-fields">
+<div class="application-field"><label for="mother_full_name">Full name</label><input id="mother_full_name" name="mother_full_name" value="{{ form_data.mother_full_name|default:'' }}"></div>
+<div class="application-field"><label for="mother_relationship">Relationship to child</label><select id="mother_relationship" name="mother_relationship"><option value="">Select relationship</option><option>Mother</option><option>Guardian</option><option>Other</option></select></div>
+<div class="application-field"><label for="mother_phone">Phone number</label><input type="tel" id="mother_phone" name="mother_phone" value="{{ form_data.mother_phone|default:'' }}"></div>
+<div class="application-field"><label for="mother_email">Email address</label><input type="email" id="mother_email" name="mother_email" value="{{ form_data.mother_email|default:'' }}"></div>
+<div class="application-field full"><label for="mother_occupation">Occupation</label><input id="mother_occupation" name="mother_occupation" value="{{ form_data.mother_occupation|default:'' }}"></div>
+<div class="application-field full"><label for="parent_full_name">Primary parent / guardian full name <span class="application-required">*</span></label><input id="parent_full_name" name="parent_full_name" value="{{ form_data.parent_full_name|default:'' }}" required><small>The parent or guardian the school should contact first.</small></div>
+<div class="application-field"><label for="parent_relationship">Relationship to child</label><input id="parent_relationship" name="parent_relationship" value="{{ form_data.parent_relationship|default:'' }}"></div>
+<div class="application-field"><label for="parent_phone">Primary contact phone <span class="application-required">*</span></label><input type="tel" id="parent_phone" name="parent_phone" value="{{ form_data.parent_phone|default:'' }}" required></div>
+<div class="application-field"><label for="parent_email">Primary contact email (optional)</label><input type="email" id="parent_email" name="parent_email" value="{{ form_data.parent_email|default:'' }}"></div>
+<div class="application-field full"><label for="residential_address">Residential address <span class="application-required">*</span></label><textarea id="residential_address" name="residential_address" required>{{ form_data.residential_address|default:'' }}</textarea></div>
+<div class="application-field full"><label for="additional_information">Additional information (optional)</label><textarea id="additional_information" name="additional_information">{{ form_data.additional_information|default:'' }}</textarea></div>
+</div>
+</section>
+
+
+<div class="application-fields">
+    <div class="application-field full">
+        <label for="declaration_name">
+            Parent / guardian full name
+            <span class="application-required">*</span>
+        </label>
+        <input
+            id="declaration_name"
+            name="declaration_name"
+            value="{{ form_data.declaration_name|default:'' }}"
+            required
+        >
+    </div>
+
+    <div class="application-field">
+        <label for="declaration_date">
+            Declaration date
+            <span class="application-required">*</span>
+        </label>
+        <input
+            type="date"
+            id="declaration_date"
+            name="declaration_date"
+            value="{{ form_data.declaration_date|default:today }}"
+            required
+            max="{{ today }}"
+        >
+    </div>
+</div>
+
+<div class="application-declaration">
+    <label>
+        <input type="checkbox" name="declaration_accepted" required>
+        <span>
+            I confirm that the information provided in this application
+            is accurate and complete to the best of my knowledge, and I
+            understand that the school may contact me to verify the details.
+        </span>
+    </label>
+</div>
+</section>
+
+<div class="application-actions">
+    {% if public_application %}
+        <a class="application-cancel" href="/">Cancel</a>
+        <button class="application-submit" type="submit">Submit Application &nbsp; →</button>
+    {% else %}
+        <a class="application-cancel" href="{% url 'admissions:dashboard' %}">Cancel</a>
+        <button class="application-submit" type="submit">Save Application &nbsp; →</button>
+    {% endif %}
+</div>
+</form>
+</main>
+</body>
+</html>
+
+

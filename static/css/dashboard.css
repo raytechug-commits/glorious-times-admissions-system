@@ -1,0 +1,1460 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --navy: #14213d;
+    --navy-light: #1e3156;
+    --red: #b51f32;
+    --gold: #e4b64f;
+    --cream: #f7f8fb;
+    --white: #ffffff;
+    --text: #202b3c;
+    --muted: #748095;
+    --border: #e8ebf1;
+    --green: #16845b;
+    --shadow: 0 12px 35px rgba(20, 33, 61, .08);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    color: var(--text);
+    background: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+    margin-top: 0;
+    color: var(--navy);
+    font-family: 'Manrope', sans-serif;
+    line-height: 1.25;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button, input, select, textarea {
+    font: inherit;
+}
+
+button, .btn {
+    cursor: pointer;
+}
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 10px 18px;
+    border: 0;
+    border-radius: 9px;
+    background: var(--red);
+    color: var(--white);
+    font-weight: 700;
+    transition: transform .2s ease, background .2s ease;
+}
+
+.btn:hover {
+    background: #94182a;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: var(--white);
+    color: var(--navy);
+    border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+    background: #f0f3f8;
+}
+
+.form-control {
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 14px;
+    color: var(--text);
+    background: var(--white);
+    border: 1px solid #dfe4ec;
+    border-radius: 9px;
+    outline: none;
+}
+
+.form-control:focus {
+    border-color: var(--navy-light);
+    box-shadow: 0 0 0 3px rgba(30, 49, 86, .09);
+}
+
+.muted {
+    color: var(--muted);
+}
+
+.brand-mark {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    border-radius: 14px;
+    background: var(--navy);
+    color: var(--gold);
+    font-family: 'Manrope', sans-serif;
+    font-size: 19px;
+    font-weight: 800;
+    border-bottom: 3px solid var(--red);
+}
+
+.brand-name {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.35;
+}
+
+.brand-caption {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+.auth-page {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(340px, .95fr);
+    min-height: 100vh;
+    background: var(--white);
+}
+
+.auth-brand-panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: clamp(30px, 6vw, 76px);
+    color: var(--white);
+    background:
+        radial-gradient(ellipse at 15% 90%, rgba(181, 31, 50, .36), transparent 45%),
+        linear-gradient(145deg, #101b34, #223c68);
+}
+
+.auth-brand-panel::after {
+    position: absolute;
+    right: -120px;
+    bottom: -170px;
+    width: 390px;
+    height: 390px;
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 50%;
+    content: "";
+}
+
+.auth-brand-panel > * {
+    position: relative;
+    z-index: 1;
+}
+
+.auth-brand-panel .brand-name {
+    color: var(--white);
+    font-size: 18px;
+}
+
+.auth-brand-panel .brand-caption {
+    color: #c4ccdb;
+}
+
+.auth-welcome {
+    max-width: 510px;
+    margin: 65px 0;
+}
+
+.auth-welcome .eyebrow {
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+}
+
+.auth-welcome h1 {
+    margin: 18px 0;
+    color: var(--white);
+    font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: -.04em;
+}
+
+.auth-welcome p {
+    max-width: 410px;
+    color: #d0d8e7;
+    font-size: 15px;
+}
+
+.auth-motto {
+    color: #e9c96f;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .12em;
+}
+
+.auth-form-panel {
+    display: grid;
+    place-items: center;
+    padding: 36px 24px;
+}
+
+.auth-form {
+    width: 100%;
+    max-width: 410px;
+}
+
+.auth-form h2 {
+    margin: 0 0 8px;
+    font-size: 28px;
+    letter-spacing: -.03em;
+}
+
+.auth-description {
+    margin: 0 0 30px;
+    color: var(--muted);
+}
+
+.form-field {
+    margin-bottom: 19px;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.auth-submit {
+    width: 100%;
+    min-height: 48px;
+    margin-top: 8px;
+}
+
+.auth-footer {
+    margin-top: 28px;
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+}
+
+.dashboard-shell {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 255px;
+    flex: 0 0 255px;
+    padding: 25px 17px;
+    color: #e9eef8;
+    background: var(--navy);
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 8px 28px;
+    border-bottom: 1px solid rgba(255, 255, 255, .12);
+}
+
+.sidebar .brand-mark {
+    background: var(--white);
+    color: var(--navy);
+}
+
+.sidebar .brand-name {
+    color: var(--white);
+    font-size: 13px;
+}
+
+.sidebar .brand-caption {
+    color: #b7c2d7;
+    font-size: 9px;
+}
+
+.sidebar-label {
+    margin: 28px 10px 10px;
+    color: #9eabc3;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+}
+
+.sidebar-nav {
+    display: grid;
+    gap: 5px;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 13px;
+    border-radius: 9px;
+    color: #c8d2e3;
+    font-weight: 600;
+    transition: background .2s ease, color .2s ease;
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+    color: var(--white);
+    background: var(--navy-light);
+}
+
+.sidebar-link.active {
+    box-shadow: inset 3px 0 var(--gold);
+}
+
+.sidebar-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 22px;
+    color: var(--gold);
+    font-size: 17px;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    padding-top: 24px;
+}
+
+.sidebar-note {
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, .13);
+    border-radius: 11px;
+    color: #c8d2e3;
+    font-size: 12px;
+}
+
+.sidebar-note strong {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--white);
+}
+
+.dashboard-main {
+    min-width: 0;
+    flex: 1;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 82px;
+    padding: 17px 32px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+}
+
+.topbar-title {
+    margin: 0;
+    font-size: 19px;
+}
+
+.topbar-subtitle {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.staff-chip {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.staff-avatar {
+    display: grid;
+    place-items: center;
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+    background: #edf0f7;
+    color: var(--navy);
+    font-weight: 800;
+}
+
+.staff-name {
+    margin: 0;
+    font-weight: 700;
+}
+
+.staff-role {
+    margin: 2px 0 0;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.dashboard-content {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 32px;
+}
+
+.page-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.page-heading h1 {
+    margin: 0 0 7px;
+    font-size: clamp(24px, 3vw, 31px);
+    letter-spacing: -.04em;
+}
+
+.page-heading p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 27px;
+}
+
+.stat-card {
+    padding: 21px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    box-shadow: 0 4px 14px rgba(20, 33, 61, .025);
+}
+
+.stat-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.stat-label {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.stat-icon {
+    display: grid;
+    place-items: center;
+    width: 39px;
+    height: 39px;
+    border-radius: 11px;
+    background: #f0f3f9;
+    color: var(--navy);
+    font-size: 18px;
+}
+
+.stat-card.pending .stat-icon {
+    background: #fff4df;
+    color: #946514;
+}
+
+.stat-card.accepted .stat-icon {
+    background: #e5f6ed;
+    color: var(--green);
+}
+
+.stat-card.reviewing .stat-icon {
+    background: #eaf0ff;
+    color: #3c5da7;
+}
+
+.stat-number {
+    display: block;
+    margin-top: 13px;
+    color: var(--navy);
+    font-family: 'Manrope', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.stat-caption {
+    margin-top: 7px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.panel {
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    box-shadow: 0 4px 14px rgba(20, 33, 61, .025);
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 22px 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.panel-header h2 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.panel-header p {
+    margin: 5px 0 0;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.panel-body {
+    padding: 24px;
+}
+
+.table-tools {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 19px;
+}
+
+.table-tools .form-control {
+    max-width: 340px;
+}
+
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.data-table th {
+    padding: 13px 15px;
+    color: var(--muted);
+    background: #f8f9fc;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+.data-table td {
+    padding: 16px 15px;
+    border-bottom: 1px solid #edf0f5;
+    font-size: 12px;
+}
+
+.data-table tbody tr:hover {
+    background: #fbfcfe;
+}
+
+.application-ref {
+    color: var(--navy);
+    font-weight: 800;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 9px;
+    border-radius: 30px;
+    background: #fff4df;
+    color: #8a6014;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.status-badge.accepted {
+    background: #e5f6ed;
+    color: #16734e;
+}
+
+.status-badge.reviewing {
+    background: #eaf0ff;
+    color: #3557a0;
+}
+
+.status-badge.rejected {
+    background: #ffebee;
+    color: #a51e31;
+}
+
+.empty-state {
+    padding: 45px 20px;
+    color: var(--muted);
+    text-align: center;
+}
+
+.empty-state strong {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--navy);
+    font-size: 15px;
+}
+
+.mobile-menu-button {
+    display: none;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--navy);
+}
+
+@media (max-width: 1100px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dashboard-content {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 760px) {
+    .auth-page {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-brand-panel {
+        min-height: 280px;
+        padding: 27px 25px;
+    }
+
+    .auth-welcome {
+        margin: 40px 0 25px;
+    }
+
+    .auth-welcome h1 {
+        font-size: 34px;
+    }
+
+    .auth-form-panel {
+        padding: 40px 24px;
+    }
+
+    .sidebar {
+        position: fixed;
+        z-index: 20;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 270px;
+        transform: translateX(-100%);
+        transition: transform .25s ease;
+    }
+
+    .sidebar.is-open {
+        transform: translateX(0);
+    }
+
+    .mobile-menu-button {
+        display: inline-flex;
+    }
+
+    .topbar {
+        min-height: 72px;
+        padding: 14px 17px;
+    }
+
+    .topbar-title {
+        font-size: 16px;
+    }
+
+    .dashboard-content {
+        padding: 21px 16px;
+    }
+
+    .page-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .stats-grid {
+        gap: 12px;
+    }
+
+    .stat-card {
+        padding: 15px;
+    }
+
+    .stat-number {
+        font-size: 25px;
+    }
+
+    .panel-header,
+    .panel-body {
+        padding: 17px;
+    }
+
+    .staff-chip .staff-details {
+        display: none;
+    }
+}
+
+@media (max-width: 400px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.school-logo {
+    display: block;
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin: 0 auto 18px;
+}
+
+/* GLORIOUS TIMES ADMISSIONS LOGIN DESIGN */
+
+.gt-login-body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: #14213d;
+    background: #f3f6fb;
+}
+
+.gt-login-page {
+    display: grid;
+    grid-template-columns: 42% 58%;
+    min-height: 100vh;
+}
+
+.gt-brand-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+    color: white;
+    background: linear-gradient(145deg, #142d59, #07142e);
+}
+
+.gt-school-brand {
+    text-align: center;
+}
+
+.gt-school-logo {
+    display: block;
+    width: 175px;
+    height: 150px;
+    object-fit: contain;
+    margin: 0 auto 16px;
+}
+
+.gt-school-brand h1 {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 29px;
+}
+
+.gt-school-brand h2 {
+    margin-top: 8px;
+    font-size: 19px;
+}
+
+.gt-brand-divider {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin: 24px 0 30px;
+}
+
+.gt-brand-divider span {
+    width: 45px;
+    height: 4px;
+    border-radius: 5px;
+    background: #b51f32;
+}
+
+.gt-brand-divider span:nth-child(2) {
+    background: #e4b64f;
+}
+
+.gt-welcome h2 {
+    font-family: Georgia, serif;
+    font-size: 32px;
+    line-height: 1.2;
+}
+
+.gt-welcome p {
+    color: #e0e8f6;
+    line-height: 1.8;
+}
+
+.gt-eyebrow,
+.gt-form-label {
+    color: #e4b64f;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.gt-benefits {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.gt-benefit {
+    text-align: center;
+    padding: 8px;
+    border-right: 1px solid #536584;
+}
+
+.gt-benefit:last-child {
+    border-right: 0;
+}
+
+.gt-benefit-icon {
+    color: #e4b64f;
+    font-size: 25px;
+}
+
+.gt-benefit h3 {
+    font-size: 13px;
+}
+
+.gt-benefit p {
+    color: #d4deef;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.gt-motto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.gt-motto span {
+    width: 30px;
+    height: 3px;
+    background: #e4b64f;
+}
+
+.gt-motto p {
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.gt-brand-footer {
+    margin-top: 18px;
+    text-align: center;
+    color: #cbd7e9;
+    font-size: 12px;
+}
+
+.gt-form-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 35px;
+    background: #f7f9fd;
+}
+
+.gt-form-card {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 470px;
+    padding: 38px;
+    border: 1px solid #e1e8f2;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 15px 45px rgba(20, 33, 61, 0.1);
+}
+
+.gt-mobile-brand {
+    display: none;
+}
+
+.gt-form-heading h2 {
+    margin-bottom: 8px;
+    color: #14213d;
+    font-family: Georgia, serif;
+    font-size: 35px;
+}
+
+.gt-form-heading > p {
+    margin-bottom: 28px;
+    color: #65748b;
+    line-height: 1.6;
+}
+
+.gt-form-label {
+    color: #b51f32;
+}
+
+.gt-error {
+    margin-bottom: 18px;
+    padding: 12px;
+    border-radius: 8px;
+    background: #fff0f1;
+    color: #a51e31;
+    line-height: 1.6;
+}
+
+.gt-login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.gt-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.gt-field label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.gt-field input {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 50px;
+    padding: 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font: inherit;
+}
+
+.gt-field input:focus {
+    outline: 2px solid #b8cbed;
+    border-color: #244e8a;
+}
+
+.gt-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    min-height: 52px;
+    margin-top: 5px;
+    border: 0;
+    border-radius: 8px;
+    background: #b51f32;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.gt-submit:hover {
+    background: #94182a;
+}
+
+.gt-security-note {
+    margin-top: 23px;
+    color: #64748b;
+    font-size: 12px;
+    text-align: center;
+}
+
+.gt-security-note span {
+    color: #b51f32;
+}
+
+.gt-form-footer {
+    margin-top: 25px;
+    padding-top: 18px;
+    border-top: 1px solid #e5eaf1;
+    text-align: center;
+}
+
+.gt-form-footer p,
+.gt-form-footer a {
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.gt-form-footer p {
+    color: #64748b;
+}
+
+.gt-form-footer a {
+    color: #b51f32;
+}
+
+@media (max-width: 850px) {
+    .gt-login-page {
+        grid-template-columns: 1fr;
+    }
+
+    .gt-brand-panel {
+        padding: 30px 24px;
+    }
+
+    .gt-school-logo {
+        width: 140px;
+        height: 120px;
+    }
+
+    .gt-welcome h2 {
+        font-size: 28px;
+    }
+
+    .gt-form-panel {
+        padding: 25px 16px;
+    }
+
+    .gt-form-card {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 400px) {
+    .gt-benefits {
+        grid-template-columns: 1fr;
+    }
+
+    .gt-benefit {
+        border-right: 0;
+        border-bottom: 1px solid #536584;
+    }
+
+    .gt-benefit:last-child {
+        border-bottom: 0;
+    }
+}
+/* ==========================================
+   GLORIOUS TIMES — STAFF LOGIN REDESIGN
+   ========================================== */
+.gt-login-body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #182747;
+    background: #f3f5f9;
+}
+.gt-login-page {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(380px, 0.95fr);
+}
+.gt-brand-panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 55px clamp(28px, 6vw, 90px);
+    overflow: hidden;
+    color: #ffffff;
+    background: linear-gradient(145deg, #101c3d 0%, #18396b 65%, #24517b 100%);
+}
+.gt-brand-panel::before,
+.gt-brand-panel::after {
+    content: "";
+    position: absolute;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 50%;
+    pointer-events: none;
+}
+.gt-brand-panel::before {
+    width: 390px;
+    height: 390px;
+    right: -170px;
+    top: -150px;
+}
+.gt-brand-panel::after {
+    width: 280px;
+    height: 280px;
+    left: -160px;
+    bottom: -120px;
+}
+.gt-school-brand,
+.gt-welcome,
+.gt-benefits,
+.gt-motto,
+.gt-brand-footer {
+    position: relative;
+    z-index: 1;
+}
+.gt-school-brand {
+    margin-bottom: 45px;
+}
+.gt-school-logo {
+    display: block;
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    padding: 8px;
+    margin-bottom: 22px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.18);
+}
+.gt-school-brand h1 {
+    margin: 0 0 7px;
+    color: #ffffff;
+    font-size: clamp(25px, 3vw, 37px);
+    line-height: 1.2;
+    font-weight: 750;
+    letter-spacing: -.7px;
+}
+.gt-school-brand h2 {
+    margin: 0;
+    color: #f4d477;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: .4px;
+}
+.gt-brand-divider {
+    display: flex;
+    gap: 6px;
+    margin-top: 20px;
+}
+.gt-brand-divider span {
+    display: block;
+    width: 30px;
+    height: 4px;
+    border-radius: 5px;
+    background: #e4b64f;
+}
+.gt-brand-divider span:nth-child(2) {
+    width: 15px;
+    background: #ffffff;
+}
+.gt-brand-divider span:nth-child(3) {
+    width: 8px;
+    background: #d94352;
+}
+.gt-eyebrow,
+.gt-form-label {
+    display: inline-block;
+    color: #e4b64f;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+.gt-welcome h2 {
+    max-width: 530px;
+    margin: 15px 0;
+    color: #ffffff;
+    font-size: clamp(30px, 3.4vw, 46px);
+    line-height: 1.16;
+    letter-spacing: -1px;
+}
+.gt-welcome p {
+    max-width: 480px;
+    margin: 0;
+    color: #e0e8f5;
+    font-size: 15px;
+    line-height: 1.85;
+}
+.gt-benefits {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 38px;
+}
+.gt-benefit {
+    padding: 17px 13px;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 13px;
+    background: rgba(255,255,255,.07);
+}
+.gt-benefit-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 10px;
+    color: #14213d;
+    background: #e4b64f;
+    border-radius: 9px;
+    font-size: 16px;
+}
+.gt-benefit h3 {
+    margin: 0 0 7px;
+    color: #ffffff;
+    font-size: 13px;
+    line-height: 1.4;
+}
+.gt-benefit p {
+    margin: 0;
+    color: #d8e2f2;
+    font-size: 11px;
+    line-height: 1.65;
+}
+.gt-motto {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 35px;
+}
+.gt-motto span {
+    width: 30px;
+    height: 1px;
+    background: #e4b64f;
+}
+.gt-motto p {
+    margin: 0;
+    color: #f4d477;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+.gt-brand-footer {
+    margin-top: 18px;
+    color: #d8e2f2;
+    font-size: 12px;
+}
+.gt-form-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px clamp(22px, 5vw, 75px);
+    background: #f5f7fb;
+}
+.gt-form-card {
+    width: 100%;
+    max-width: 430px;
+    padding: clamp(25px, 4vw, 43px);
+    border: 1px solid #e6eaf1;
+    border-radius: 22px;
+    background: #ffffff;
+    box-shadow: 0 18px 55px rgba(16, 28, 61, .09);
+}
+.gt-mobile-brand {
+    display: none;
+}
+.gt-form-heading {
+    margin-bottom: 28px;
+}
+.gt-form-heading h2 {
+    margin: 11px 0 8px;
+    color: #14213d;
+    font-size: clamp(27px, 3vw, 35px);
+    font-weight: 750;
+    letter-spacing: -1px;
+}
+.gt-form-heading p {
+    margin: 0;
+    color: #66738a;
+    font-size: 14px;
+    line-height: 1.7;
+}
+.gt-error {
+    margin: 0 0 20px;
+    padding: 13px 15px;
+    border: 1px solid #f2c6ca;
+    border-left: 4px solid #b51f32;
+    border-radius: 9px;
+    color: #8f1827;
+    background: #fff1f2;
+    font-size: 13px;
+    line-height: 1.6;
+}
+.gt-error strong {
+    display: block;
+    margin-bottom: 3px;
+    color: #8f1827;
+}
+.gt-login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.gt-field {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+.gt-field label {
+    color: #24334f;
+    font-size: 13px;
+    font-weight: 700;
+}
+.gt-field input {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 51px;
+    padding: 13px 15px;
+    border: 1px solid #d8deea;
+    border-radius: 10px;
+    outline: none;
+    color: #182747;
+    background: #fbfcfe;
+    font: inherit;
+    font-size: 14px;
+    transition: border-color .2s, box-shadow .2s, background .2s;
+}
+.gt-field input::placeholder {
+    color: #8b95a7;
+}
+.gt-field input:focus {
+    border-color: #24517b;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(36,81,123,.12);
+}
+.gt-submit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    width: 100%;
+    min-height: 53px;
+    margin-top: 4px;
+    padding: 14px 18px;
+    border: 0;
+    border-radius: 10px;
+    color: #ffffff;
+    background: linear-gradient(110deg, #14213d, #244d7c);
+    box-shadow: 0 7px 18px rgba(20,33,61,.18);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+}
+.gt-submit span:last-child {
+    color: #f4d477;
+    font-size: 22px;
+}
+.gt-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 11px 24px rgba(20,33,61,.24);
+}
+.gt-security-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 23px;
+    color: #66738a;
+    font-size: 11px;
+    text-align: center;
+}
+.gt-security-note span {
+    color: #b51f32;
+}
+.gt-form-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #edf0f5;
+    text-align: center;
+}
+.gt-form-footer p {
+    margin: 5px 0;
+    color: #66738a;
+    font-size: 11px;
+    line-height: 1.6;
+}
+.gt-form-footer a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #244d7c;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+.gt-form-footer a:hover {
+    color: #b51f32;
+    text-decoration: underline;
+}
+@media (max-width: 900px) {
+    .gt-login-page {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .gt-brand-panel {
+        padding: 35px clamp(24px, 7vw, 55px);
+    }
+    .gt-school-brand {
+        margin-bottom: 28px;
+    }
+    .gt-school-logo {
+        width: 76px;
+        height: 76px;
+    }
+    .gt-welcome h2 {
+        font-size: 34px;
+    }
+    .gt-benefits {
+        margin-top: 26px;
+    }
+    .gt-motto {
+        margin-top: 25px;
+    }
+    .gt-form-panel {
+        padding: 35px 20px;
+    }
+}
+@media (max-width: 520px) {
+    .gt-brand-panel {
+        padding: 28px 22px;
+    }
+    .gt-school-brand h1 {
+        font-size: 27px;
+    }
+    .gt-welcome h2 {
+        font-size: 30px;
+    }
+    .gt-benefits {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .gt-benefit {
+        display: grid;
+        grid-template-columns: 35px 1fr;
+        column-gap: 10px;
+        align-items: center;
+        padding: 12px;
+    }
+    .gt-benefit-icon {
+        grid-row: span 2;
+        margin: 0;
+    }
+    .gt-benefit h3 {
+        margin: 0 0 3px;
+    }
+    .gt-form-card {
+        padding: 25px 20px;
+        border-radius: 16px;
+    }
+}
+/* SCHOOL LOGO - keep the original sidebar dimensions */
+.sidebar .brand-mark img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+}

@@ -1,0 +1,102 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Applications | Glorious Times</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+<div class="dashboard-shell">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-mark">GT</div>
+            <div>
+                <p class="brand-name">Glorious Times</p>
+                <p class="brand-caption">Admissions Portal</p>
+            </div>
+        </div>
+        <p class="sidebar-label">Workspace</p>
+        <nav class="sidebar-nav" aria-label="Main navigation">
+            <a class="sidebar-link" href="{% url 'admissions:dashboard' %}">
+                <span class="sidebar-icon"></span> Dashboard
+            </a>
+            <a class="sidebar-link active" href="{% url 'admissions:applications_list' %}">
+                <span class="sidebar-icon"></span> Applications
+            </a>
+        </nav>
+    </aside>
+    <main class="dashboard-main">
+        <header class="topbar">
+            <div>
+                <h2 class="topbar-title">Applications</h2>
+                <p class="topbar-subtitle">Review and manage submitted pupil applications.</p>
+            </div>
+            <a class="btn btn-secondary" href="{% url 'admissions:dashboard' %}">Dashboard</a>
+        </header>
+        <section class="panel">
+            <div class="panel-body">
+                <form method="get" class="table-tools">
+                    <input class="form-control" type="search" name="q"
+                           value="{{ query }}"
+                           placeholder="Search pupil, parent or application number..."
+                           aria-label="Search applications">
+                    <select class="form-control" name="status" aria-label="Filter by status">
+                        <option value="">All statuses</option>
+                        <option value="pending" {% if selected_status == "pending" %}selected{% endif %}>Pending</option>
+                        <option value="reviewing" {% if selected_status == "reviewing" %}selected{% endif %}>Under review</option>
+                        <option value="accepted" {% if selected_status == "accepted" %}selected{% endif %}>Accepted</option>
+                        <option value="waitlisted" {% if selected_status == "waitlisted" %}selected{% endif %}>Waitlisted</option>
+                        <option value="rejected" {% if selected_status == "rejected" %}selected{% endif %}>Rejected</option>
+                    </select>
+                    <button class="btn btn-secondary" type="submit">Search</button>
+                    <a class="btn btn-secondary" href="{% url 'admissions:applications_list' %}">Clear</a>
+                </form>
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Application no.</th>
+                                <th>Pupil</th>
+                                <th>Class</th>
+                                <th>Parent / guardian</th>
+                                <th>Date submitted</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for application in applications %}
+                            <tr>
+                                <td class="application-ref">
+                                    {{ application.application_number|default:application.application_reference|default:"Pending" }}
+                                </td>
+                                <td>{{ application.pupil_first_name }} {{ application.pupil_last_name }}</td>
+                                <td>{{ application.class_applying_for }}</td>
+                                <td>{{ application.parent_full_name }}</td>
+                                <td>{{ application.submitted_at|date:"d M Y" }}</td>
+                                <td>
+                                    <span class="status-badge {{ application.status }}">
+                                        {{ application.get_status_display }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <a class="btn btn-secondary"
+                                       href="{% url 'admissions:review_application' application.id %}">View</a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="7">No applications match your search.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

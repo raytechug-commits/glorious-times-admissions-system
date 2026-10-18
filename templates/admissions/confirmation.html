@@ -1,0 +1,255 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Application Submitted | Glorious Times Standards School</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 28px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f3f5f9;
+            color: #101c3d;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .confirmation {
+            width: 100%;
+            max-width: 650px;
+            padding: 32px;
+            background: #fff;
+            border: 1px solid #e8ebf2;
+            border-radius: 16px;
+            box-shadow: 0 12px 36px rgba(16, 28, 61, .08);
+        }
+        .school-header {
+            text-align: center;
+            padding-bottom: 22px;
+            border-bottom: 1px solid #edf0f5;
+        }
+        .school-logo {
+            display: block;
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin: 0 auto 12px;
+        }
+        .school-name {
+            margin: 0;
+            color: #101c3d;
+            font-size: 20px;
+            line-height: 1.4;
+        }
+        .school-location {
+            margin: 6px 0 0;
+            color: #687286;
+            font-size: 13px;
+        }
+        .success-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 54px;
+            height: 54px;
+            margin: 24px auto 14px;
+            border-radius: 50%;
+            background: #e7f6ed;
+            color: #167344;
+            font-size: 29px;
+            font-weight: bold;
+        }
+        h1 {
+            margin: 0 0 12px;
+            text-align: center;
+            font-size: 27px;
+            line-height: 1.3;
+        }
+        .intro {
+            margin: 0 auto 20px;
+            max-width: 520px;
+            text-align: center;
+            color: #505b70;
+            line-height: 1.7;
+        }
+        .reference {
+            padding: 19px;
+            margin: 22px 0;
+            text-align: center;
+            background: #fff8f8;
+            border: 1px dashed #b51f32;
+            border-radius: 11px;
+        }
+        .reference-label {
+            display: block;
+            color: #505b70;
+            font-size: 14px;
+        }
+        .reference strong {
+            display: block;
+            margin-top: 9px;
+            color: #b51f32;
+            font-size: 26px;
+            overflow-wrap: anywhere;
+        }
+        .save-note {
+            margin: 10px 0 0;
+            font-size: 13px;
+            color: #505b70;
+        }
+        .next-steps {
+            padding: 19px;
+            background: #f7f8fb;
+            border-radius: 11px;
+        }
+        .next-steps h2 {
+            margin: 0 0 14px;
+            font-size: 18px;
+        }
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 11px;
+            margin: 13px 0;
+        }
+        .step-number {
+            flex: 0 0 27px;
+            width: 27px;
+            height: 27px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #101c3d;
+            color: #fff;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .step p {
+            margin: 2px 0 0;
+            color: #505b70;
+            font-size: 14px;
+            line-height: 1.65;
+        }
+        .important {
+            margin: 18px 0 0;
+            padding: 14px;
+            border-left: 4px solid #e4b64f;
+            background: #fffaf0;
+            color: #505b70;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        .closing {
+            margin: 20px 0 0;
+            text-align: center;
+            color: #505b70;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        .motto {
+            margin: 10px 0 0;
+            text-align: center;
+            color: #b51f32;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+        }
+        .home {
+            display: block;
+            width: fit-content;
+            margin: 22px auto 0;
+            padding: 13px 25px;
+            border-radius: 7px;
+            background: #101c3d;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+        }
+        .home:hover { background: #b51f32; }
+        @media (max-width: 480px) {
+            .confirmation { padding: 23px 17px; }
+            h1 { font-size: 23px; }
+            .school-name { font-size: 18px; }
+            .reference strong { font-size: 23px; }
+        }
+    </style>
+</head>
+<body>
+    <main class="confirmation">
+        <header class="school-header">
+            <img class="school-logo"
+                 src="{% static 'images/school-logo.png' %}"
+                 alt="Glorious Times Standards Nursery and Primary School logo">
+            <h2 class="school-name">
+                Glorious Times Standards Nursery and Primary School
+            </h2>
+            <p class="school-location">Mbuya II – Kireka Road</p>
+        </header>
+        <div class="success-icon" aria-hidden="true">&#10003;</div>
+        <h1>Application Submitted Successfully!</h1>
+        <p class="intro">
+            Thank you for applying to Glorious Times Standards Nursery and
+            Primary School. We have received your child's application.
+            Please keep the reference number below for future communication
+            with the school.
+        </p>
+        <section class="reference" aria-label="Application reference">
+            <span class="reference-label">Your Application Reference Number</span>
+            <strong>{{ application.application_reference }}</strong>
+            <p class="save-note">
+                Please save this number for your records.
+            </p>
+        </section>
+        <section class="next-steps">
+            <h2>What happens next?</h2>
+            <div class="step">
+                <span class="step-number">1</span>
+                <p>
+                    <strong>Application review:</strong>
+                    The school administration will review the information
+                    submitted.
+                </p>
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <p>
+                    <strong>Check your email:</strong>
+                    Regularly check the email address provided in the
+                    application. Look in your Inbox and also your
+                    Spam/Junk folder for the school's approval message
+                    and further instructions.
+                </p>
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <p>
+                    <strong>Admission decision:</strong>
+                    If your child's application is approved, the school
+                    will communicate the official admission number and
+                    explain the next steps.
+                </p>
+            </div>
+        </section>
+        <p class="important">
+            <strong>Important:</strong>
+            This application reference confirms that your application was
+            submitted. It is not the official admission number, and
+            submission alone does not guarantee admission.
+        </p>
+        <p class="closing">
+            Thank you for considering our school for your child's education.
+            We appreciate your interest and patience while the application
+            is reviewed.
+        </p>
+        <p class="motto">IN GOD WE TRUST</p>
+        <a class="home" href="/">Return to School Website</a>
+    </main>
+</body>
+</html>

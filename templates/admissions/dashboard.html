@@ -1,0 +1,206 @@
+﻿
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admissions Dashboard | Glorious Times</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+<div class="dashboard-shell">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-mark"><img src="{% static 'images/school-logo.png' %}" alt="Glorious Times school logo"></div>
+            <div>
+                <p class="brand-name">Glorious Times</p>
+                <p class="brand-caption">Admissions Portal</p>
+            </div>
+        </div>
+
+        <p class="sidebar-label">Workspace</p>
+        <nav class="sidebar-nav" aria-label="Main navigation">
+            <a class="sidebar-link active" href="{% url 'admissions:dashboard' %}">
+                <span class="sidebar-icon"></span> Dashboard
+            </a>
+            <a class="sidebar-link" href="{% url 'admissions:applications_list' %}">
+                <span class="sidebar-icon"></span> Applications
+            </a>
+            <a class="sidebar-link" href="/admin/auth/user/">
+                <span class="sidebar-icon"></span> Staff accounts
+            </a>
+        </nav>
+
+        <p class="sidebar-label">School</p>
+        <div class="sidebar-nav">
+            <a class="sidebar-link" href="/" target="_blank" rel="noopener">
+                <span class="sidebar-icon"></span> Public website
+            </a>
+        </div>
+
+        <div class="sidebar-bottom">
+            <div class="sidebar-note">
+                <strong>Glorious Times Standards</strong>
+                Nursery and Primary School<br>
+                Mbuya II - Kireka Road
+            </div>
+        </div>
+    </aside>
+
+    <main class="dashboard-main">
+        <header class="topbar">
+            <div style="display:flex;align-items:center;gap:12px;">
+                <button class="mobile-menu-button" id="menuButton"
+                        type="button" aria-label="Toggle navigation"
+                        aria-controls="sidebar" aria-expanded="false">?</button>
+                <div>
+                    <h2 class="topbar-title">Admissions overview</h2>
+                    <p class="topbar-subtitle">Your school admissions workspace</p>
+                </div>
+            </div>
+
+            <div class="staff-chip">
+                <div class="staff-avatar">{{ request.user.username|first|upper }}</div>
+                <div class="staff-details">
+                    <p class="staff-name">{{ request.user.username }}</p>
+                    <p class="staff-role">Authorised staff</p>
+                </div>
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button class="btn btn-secondary" type="submit">Log out</button>
+                </form>
+            </div>
+        </header>
+
+        <section class="dashboard-content">
+            <div class="page-heading">
+                <div>
+                    <h1>WELCOME ADMINISTRATOR</h1>
+                    <p>Here's an overview of the school's admission applications.</p>
+                </div>
+                <a class="btn" href="{% url 'admissions:add_application' %}">
+                    + Add application
+                </a>
+            </div>
+
+            <section class="stats-grid" aria-label="Application statistics">
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span class="stat-label">Total applications</span>
+                        <span class="stat-icon"></span>
+                    </div>
+                    <strong class="stat-number">{{ total_applications }}</strong>
+                    <p class="stat-caption">All recorded applications</p>
+                </article>
+
+                <article class="stat-card pending">
+                    <div class="stat-top">
+                        <span class="stat-label">Pending review</span>
+                        <span class="stat-icon"></span>
+                    </div>
+                    <strong class="stat-number">{{ pending_applications }}</strong>
+                    <p class="stat-caption">Awaiting staff review</p>
+                </article>
+
+                <article class="stat-card reviewing">
+                    <div class="stat-top">
+                        <span class="stat-label">Under review</span>
+                        <span class="stat-icon"></span>
+                    </div>
+                    <strong class="stat-number">{{ reviewing_applications }}</strong>
+                    <p class="stat-caption">Currently being assessed</p>
+                </article>
+
+                <article class="stat-card accepted">
+                    <div class="stat-top">
+                        <span class="stat-label">Accepted</span>
+                        <span class="stat-icon"></span>
+                    </div>
+                    <strong class="stat-number">{{ accepted_applications }}</strong>
+                    <p class="stat-caption">Applications accepted</p>
+                </article>
+            </section>
+
+            <section class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Recent applications</h2>
+                        <p>The latest applications recorded in the system</p>
+                    </div>
+                    <a class="btn btn-secondary"
+                       href="{% url 'admissions:dashboard' %}">
+                        View all
+                    </a>
+                </div>
+
+                <div class="panel-body">
+                    <div class="table-tools">
+                        <input class="form-control" type="search" id="applicationSearch"
+                               placeholder="Search visible applications..."
+                               aria-label="Search applications">
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Application no.</th>
+                                    <th>Pupil</th>
+                                    <th>Class</th>
+                                    <th>Parent / guardian</th>
+                                    <th>Date submitted</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="applicationRows">
+                                {% for application in recent_applications %}
+                                <tr>
+                                    <td class="application-ref">
+                                        {{ application.application_number }}
+                                    </td>
+                                    <td>
+                                        {{ application.pupil_first_name }}
+                                        {{ application.pupil_last_name }}
+                                    </td>
+                                    <td>{{ application.class_applying_for }}</td>
+                                    <td>{{ application.parent_full_name }}</td>
+                                    <td>{{ application.submitted_at|date:"d M Y" }}</td>
+                                    <td>
+                                        <span class="status-badge {{ application.status }}">
+                                            {{ application.get_status_display }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="7">
+                                        <div class="empty-state">
+                                            <strong>No applications yet</strong>
+                                            Applications will appear here when they are recorded.
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <p class="muted" style="margin-top:22px;font-size:11px;">
+                Glorious Times Standards Nursery and Primary School | IN GOD WE TRUST
+            </p>
+        </section>
+    </main>
+</div>
+
+<script src="{% static 'js/dashboard.js' %}"></script>
+</body>
+</html>
+
+
+
+
+

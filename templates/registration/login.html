@@ -1,0 +1,173 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#102653">
+    <title>Staff Login | Glorious Times Standards School</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+
+<body class="gt-login-body">
+    <main class="gt-login-page">
+
+        <!-- LEFT: SCHOOL BRANDING -->
+        <section class="gt-brand-panel">
+
+            <header class="gt-school-brand">
+                <img
+                    src="{% static 'images/school-logo.png' %}"
+                    alt="Glorious Times Standards Nursery and Primary School crest"
+                    class="gt-school-logo"
+                >
+
+                <h1>Glorious Times Standards</h1>
+                <h2>Nursery &amp; Primary School</h2>
+
+                <div class="gt-brand-divider">
+                    <span></span><span></span><span></span>
+                </div>
+            </header>
+
+            <div class="gt-welcome">
+                <span class="gt-eyebrow">STAFF PORTAL</span>
+
+                <h2>Every application deserves a bright beginning.</h2>
+
+                <p>
+                    Welcome to the admissions management portal.
+                    Review applications, manage admissions, and help
+                    every learner take the next step.
+                </p>
+            </div>
+
+            <div class="gt-benefits">
+                <div class="gt-benefit">
+                    <span class="gt-benefit-icon" aria-hidden="true">✦</span>
+                    <h3>Better Access</h3>
+                    <p>Keep applications organised and accessible.</p>
+                </div>
+
+                <div class="gt-benefit">
+                    <span class="gt-benefit-icon" aria-hidden="true">✓</span>
+                    <h3>Trusted Process</h3>
+                    <p>Review pupil applications systematically.</p>
+                </div>
+
+                <div class="gt-benefit">
+                    <span class="gt-benefit-icon" aria-hidden="true">★</span>
+                    <h3>Brighter Futures</h3>
+                    <p>Support every learner's next step.</p>
+                </div>
+            </div>
+
+            <div class="gt-motto">
+                <span></span>
+                <p>IN GOD WE TRUST</p>
+                <span></span>
+            </div>
+
+            <footer class="gt-brand-footer">
+                Mbuya II – Kireka Road, Uganda
+            </footer>
+
+        </section>
+
+        <!-- RIGHT: STAFF LOGIN -->
+        <section class="gt-form-panel">
+
+            <div class="gt-form-card">
+
+                <div class="gt-mobile-brand">
+                    <img
+                        src="{% static 'images/school-logo.png' %}"
+                        alt="School crest"
+                        class="gt-mobile-logo"
+                    >
+                    <p>Glorious Times Standards</p>
+                    <span>Nursery &amp; Primary School</span>
+                </div>
+
+                <div class="gt-form-heading">
+                    <span class="gt-form-label">STAFF ACCESS</span>
+                    <h2>Welcome back</h2>
+                    <p>
+                        Sign in with your authorised staff account.
+                    </p>
+                </div>
+
+                {% if form.errors %}
+                    <div class="gt-error" role="alert">
+                        <strong>Unable to sign in.</strong>
+                        Check your username and password, then try again.
+                    </div>
+                {% endif %}
+
+                {% if next and user.is_authenticated %}
+                    <div class="gt-error" role="alert">
+                        Your account does not have permission to access
+                        that page. Please contact your administrator.
+                    </div>
+                {% endif %}
+
+                <form method="post" class="gt-login-form">
+                    {% csrf_token %}
+
+                    <input
+                        type="hidden"
+                        name="next"
+                        value="{{ next|default:'' }}"
+                    >
+
+                    <div class="gt-field">
+                        <label for="id_username">Username</label>
+                        <input
+                            type="text"
+                            name="username"
+                            id="id_username"
+                            autocomplete="username"
+                            placeholder="Enter your username"
+                            required
+                            autofocus
+                        >
+                    </div>
+
+                    <div class="gt-field">
+                        <label for="id_password">Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            id="id_password"
+                            autocomplete="current-password"
+                            placeholder="Enter your password"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="gt-submit">
+                        <span>Sign in to dashboard</span>
+                        <span aria-hidden="true">→</span>
+                    </button>
+                </form>
+
+                <div class="gt-security-note">
+                    <span aria-hidden="true">◆</span>
+                    Secure access for authorised school staff
+                </div>
+
+                <footer class="gt-form-footer">
+                    <p>Glorious Times Standards Nursery and Primary School</p>
+                    <p>Mbuya II – Kireka Road, Uganda</p>
+                    <a href="mailto:glolrioustimesschooladmin@gmail.com">
+                        Contact school administration
+                    </a>
+                </footer>
+
+            </div>
+        </section>
+
+    </main>
+</body>
+</html>

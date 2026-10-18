@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Review Application | Glorious Times</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <style>
+        .review-page{max-width:1100px;margin:32px auto;padding:20px}
+        .review-header,.review-card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 4px 18px #101c3d12}
+        .review-header h1{margin:0 0 8px;font-size:26px;color:#101c3d}
+        .review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+        .review-field{padding:12px;background:#f8f6f1;border-radius:8px;overflow-wrap:anywhere}
+        .review-field small{display:block;color:#596174;margin-bottom:5px}
+        .review-field strong{color:#101c3d}
+        .review-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+        .review-actions button{border:0;border-radius:7px;padding:12px 18px;cursor:pointer;font-weight:700}
+        .approve{background:#176b45;color:#fff}.reject{background:#b51f32;color:#fff}
+        .reviewing{background:#e4b64f;color:#101c3d}
+        .reason-box{width:100%;min-height:100px;padding:12px;border:1px solid #cbd0da;border-radius:8px;box-sizing:border-box}
+        .messages{padding:0;list-style:none}.messages li{padding:12px;background:#f8f6f1;margin-bottom:8px;border-radius:6px}
+        .back-link{display:inline-block;margin-bottom:18px;color:#101c3d;font-weight:700}
+    </style>
+</head>
+<body>
+<main class="review-page">
+    <a class="back-link" href="{% url 'admissions:dashboard' %}">&larr; Back to dashboard</a>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}<li>{{ message }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+    <section class="review-header">
+        <h1>Application Review</h1>
+        <p>Reference:
+            <strong>{{ application.application_reference|default:application.application_number|default:"Not assigned" }}</strong>
+        </p>
+        <p>Pupil: <strong>{{ application.pupil_first_name }} {{ application.pupil_middle_name }} {{ application.pupil_last_name }}</strong></p>
+        <p>Status: <strong>{{ application.get_status_display }}</strong></p>
+        {% if application.admission_number %}
+        <p>Admission number: <strong>{{ application.admission_number }}</strong></p>
+        {% endif %}
+        <p>Submitted: {{ application.submitted_at|date:"d M Y, H:i" }}</p>
+    </section>
+    <section class="review-card">
+        <h2>Pupil Information</h2>
+        <div class="review-grid">
+            <div class="review-field"><small>Date of birth</small><strong>{{ application.date_of_birth|date:"d M Y" }}</strong></div>
+            <div class="review-field"><small>Gender</small><strong>{{ application.gender|default:"Not provided" }}</strong></div>
+            <div class="review-field"><small>Class applying for</small><strong>{{ application.class_applying_for }}</strong></div>
+            <div class="review-field"><small>Previous school</small><strong>{{ application.previous_school|default:"Not provided" }}</strong></div>
+            <div class="review-field"><small>Residential address</small><strong>{{ application.residential_address }}</strong></div>
+            <div class="review-field"><small>Medical information</small><strong>{{ application.medical_information|default:"Not provided" }}</strong></div>
+            <div class="review-field"><small>Additional information</small><strong>{{ application.additional_information|default:"Not provided" }}</strong></div>
+        </div>
+    </section>
+    <section class="review-card">
+        <h2>Parent / Guardian</h2>
+        <div class="review-grid">
+            <div class="review-field"><small>Full name</small><strong>{{ application.parent_full_name }}</strong></div>
+            <div class="review-field"><small>Relationship</small><strong>{{ application.parent_relationship|default:"Not provided" }}</strong></div>
+            <div class="review-field"><small>Phone</small><strong>{{ application.parent_phone }}</strong></div>
+            <div class="review-field"><small>Email</small><strong>{{ application.parent_email|default:"Not provided" }}</strong></div>
+        </div>
+    </section>
+    <section class="review-card">
+        <h2>Father's Information</h2>
+        <div class="review-grid">
+            <div class="review-field"><small>Full name</small><strong>{{ application.father_full_name|default:"Not provided" }}</strong></div>
+            <div class="review-field"><small>Relationship</small><strong>{{ application.father_relationship|default:"Not provided" }}</strong></div>
+            <div class="review-field"><small>Phone</small><strong>{{ application.father_phone|default:"Not provided" }}</strong></div>
+            <div class="review-field"><small>Email</small><strong>{{ application.father_email|default:"Not provided" }}</strong></div>
+            <div class="review-field"><small>Occupation</small><strong>{{ application.father_occupation|default:"Not provided" }}</strong></div>
+        </div>
+    </section>
+    <section class="review-card">
+        <h2>Mother's Information</h2>
+        <div class="review-grid">
+            <div class="review-field"><small>Full name</small><strong>{{ application.mother_full_name|default:"Not provided" }}</strong></div>
+            <div class="review-field"><small>Relationship</small><strong>{{ application.mother_relationship|default:"Not provided" }}</strong></div>
+            <div class="review-field"><small>Phone</small><strong>{{ application.mother_phone|default:"Not provided" }}</strong></div>
+            <div class="review-field"><small>Email</small><strong>{{ application.mother_email|default:"Not provided" }}</strong></div>
+            <div class="review-field"><small>Occupation</small><strong>{{ application.mother_occupation|default:"Not provided" }}</strong></div>
+        </div>
+    </section>
+    <section class="review-card">
+        <h2>Declaration</h2>
+        <p>Declared by: <strong>{{ application.declaration_name|default:"Not provided" }}</strong></p>
+        <p>Declaration date: <strong>{{ application.declaration_date|date:"d M Y"|default:"Not provided" }}</strong></p>
+        <p>Accepted: <strong>{% if application.declaration_accepted %}Yes{% else %}No{% endif %}</strong></p>
+    </section>
+    {% if application.status == "rejected" and application.rejection_reason %}
+    <section class="review-card">
+        <h2>Saved Rejection Reason</h2>
+        <p>{{ application.rejection_reason }}</p>
+    </section>
+    {% endif %}
+    <section class="review-card">
+        <h2>Update Application Decision</h2>
+        <form method="post" action="{% url 'admissions:update_application_status' application.id %}">
+            {% csrf_token %}
+            <div>
+                <label for="rejection_reason"><strong>Rejection reason</strong> (required when rejecting)</label>
+                <textarea class="reason-box" id="rejection_reason" name="rejection_reason" placeholder="Explain the reason for rejection...">{{ application.rejection_reason }}</textarea>
+            </div>
+            <div class="review-actions">
+                <button class="approve" type="submit" name="action" value="accepted" onclick="return confirm('Approve this application and assign an admission number?')">Approve Application</button>
+                <button class="reject" type="submit" name="action" value="rejected" onclick="return confirm('Reject this application and save the reason?')">Reject Application</button>
+                <button class="reviewing" type="submit" name="action" value="reviewing">Mark Under Review</button>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>
+
